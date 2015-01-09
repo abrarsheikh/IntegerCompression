@@ -13,7 +13,8 @@
 #include <iostream>
 
 
-class S16 {
+class S16 
+{
 public:
     /**
      * Compress an integer array using Simple16
