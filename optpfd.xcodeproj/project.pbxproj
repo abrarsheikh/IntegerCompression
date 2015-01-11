@@ -7,9 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E527F6EE1A5DEBB80006AD3E /* IntegerCompression.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E527F6ED1A5DEBB80006AD3E /* IntegerCompression.cpp */; };
 		E527F6F11A5DEFE40006AD3E /* S16.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E527F6EF1A5DEFE40006AD3E /* S16.cpp */; };
 		E5AE58201A5B203900E27DA9 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5AE581F1A5B203900E27DA9 /* main.cpp */; };
+		E5B6E0C11A5F4FCF00680CB6 /* IntegerCompression.h in Sources */ = {isa = PBXBuildFile; fileRef = E5B6E0C01A5F4FCF00680CB6 /* IntegerCompression.h */; };
+		E5B6E0C41A5F852400680CB6 /* OptPFDS16.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5B6E0C31A5F852400680CB6 /* OptPFDS16.cpp */; };
+		E5B6E0C71A5F895B00680CB6 /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5B6E0C61A5F895B00680CB6 /* Utils.cpp */; };
+		E5B6E0CA1A6026AF00680CB6 /* BitPacking.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5B6E0C81A6026AF00680CB6 /* BitPacking.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,11 +28,17 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		E527F6ED1A5DEBB80006AD3E /* IntegerCompression.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IntegerCompression.cpp; path = ../IntegerCompression.cpp; sourceTree = "<group>"; };
 		E527F6EF1A5DEFE40006AD3E /* S16.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = S16.cpp; sourceTree = "<group>"; };
 		E527F6F01A5DEFE40006AD3E /* S16.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = S16.h; sourceTree = "<group>"; };
 		E5AE581C1A5B203900E27DA9 /* optpfd */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = optpfd; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5AE581F1A5B203900E27DA9 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		E5B6E0C01A5F4FCF00680CB6 /* IntegerCompression.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; path = IntegerCompression.h; sourceTree = "<group>"; };
+		E5B6E0C21A5F7B9800680CB6 /* OptPFDS16.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OptPFDS16.h; sourceTree = "<group>"; };
+		E5B6E0C31A5F852400680CB6 /* OptPFDS16.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OptPFDS16.cpp; sourceTree = "<group>"; };
+		E5B6E0C51A5F892900680CB6 /* Utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
+		E5B6E0C61A5F895B00680CB6 /* Utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Utils.cpp; sourceTree = "<group>"; };
+		E5B6E0C81A6026AF00680CB6 /* BitPacking.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BitPacking.cpp; sourceTree = "<group>"; };
+		E5B6E0C91A6026AF00680CB6 /* BitPacking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BitPacking.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,10 +71,16 @@
 		E5AE581E1A5B203900E27DA9 /* optpfd */ = {
 			isa = PBXGroup;
 			children = (
-				E527F6ED1A5DEBB80006AD3E /* IntegerCompression.cpp */,
+				E5B6E0C01A5F4FCF00680CB6 /* IntegerCompression.h */,
 				E527F6EF1A5DEFE40006AD3E /* S16.cpp */,
 				E527F6F01A5DEFE40006AD3E /* S16.h */,
 				E5AE581F1A5B203900E27DA9 /* main.cpp */,
+				E5B6E0C21A5F7B9800680CB6 /* OptPFDS16.h */,
+				E5B6E0C31A5F852400680CB6 /* OptPFDS16.cpp */,
+				E5B6E0C81A6026AF00680CB6 /* BitPacking.cpp */,
+				E5B6E0C91A6026AF00680CB6 /* BitPacking.h */,
+				E5B6E0C51A5F892900680CB6 /* Utils.h */,
+				E5B6E0C61A5F895B00680CB6 /* Utils.cpp */,
 			);
 			path = optpfd;
 			sourceTree = "<group>";
@@ -127,8 +142,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				E527F6F11A5DEFE40006AD3E /* S16.cpp in Sources */,
+				E5B6E0C41A5F852400680CB6 /* OptPFDS16.cpp in Sources */,
 				E5AE58201A5B203900E27DA9 /* main.cpp in Sources */,
-				E527F6EE1A5DEBB80006AD3E /* IntegerCompression.cpp in Sources */,
+				E5B6E0CA1A6026AF00680CB6 /* BitPacking.cpp in Sources */,
+				E5B6E0C71A5F895B00680CB6 /* Utils.cpp in Sources */,
+				E5B6E0C11A5F4FCF00680CB6 /* IntegerCompression.h in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
