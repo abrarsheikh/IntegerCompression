@@ -15,13 +15,19 @@
 void test_s16();
 void test_optpfd();
 void test_datagen();
+void test_logger();
 
 int main(int argc, const char * argv[]) {
     // insert code here...
     //test_s16();
     //test_optpfd();
-    test_datagen();
+    //test_datagen();
+    test_logger();
     return 0;
+}
+
+void test_logger() {
+    
 }
 
 void test_datagen() {
