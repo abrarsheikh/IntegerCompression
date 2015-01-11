@@ -10,15 +10,25 @@
 
 #include "S16.h"
 #include "OptPFDS16.h"
+#include "ClusteredDataGenerator.h"
 
 void test_s16();
 void test_optpfd();
+void test_datagen();
 
 int main(int argc, const char * argv[]) {
     // insert code here...
-    test_s16();
-    test_optpfd();
+    //test_s16();
+    //test_optpfd();
+    test_datagen();
     return 0;
+}
+
+void test_datagen() {
+    ClusteredDataGenerator cg;
+    unsigned int* example = cg.generateClustered(10, 5000);
+        for (int k = 0; k <10; ++k)
+            std::cout << example[k] << ' ';
 }
 
 void test_optpfd() {
