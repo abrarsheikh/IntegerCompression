@@ -48,15 +48,6 @@ void ClusteredDataGenerator::fillClustered(unsigned int* array, int length, int 
     }
 }
 
-/**
- * generates randomly N distinct integers from 0 to Max.
- *
- * @param N
- *                number of integers to generate
- * @param Max
- *                maximal value of the integers
- * @return array containing the integers
- */
 unsigned int* ClusteredDataGenerator::generateClustered(int N, int Max) {
     unsigned int* array = new unsigned int[N];
     fillClustered(array, N, 0, Max);

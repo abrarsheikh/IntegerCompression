@@ -1606,7 +1606,9 @@ void BitPacking::fastpack31(const unsigned int* in, unsigned int* out) {
 }
 
 void BitPacking::fastpack32(const unsigned int* in, unsigned int* out) {
-    std::memcpy(out, in , 32);
+    //std::memcpy(out, in , 32);
+    for(int i =0; i< 32; i++)
+        out[i] = in[i];
 }
 
 void BitPacking::fastpack4(const unsigned int* in, unsigned int* out) {
@@ -4278,7 +4280,10 @@ void BitPacking::fastunpack31(const unsigned int* in, unsigned int* out) {
 }
 
 void BitPacking::fastunpack32(const unsigned int* in, unsigned int* out) {
-    std::memcpy(out, in, 32);
+    //std::memcpy(out, in, 32);
+    
+    for(int i =0; i< 32; i++)
+        out[i] = in[i];
 }
 
 void BitPacking::fastunpack4(const unsigned int* in, unsigned int* out) {

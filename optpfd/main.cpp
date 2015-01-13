@@ -11,6 +11,7 @@
 #include "S16.h"
 #include "OptPFDS16.h"
 #include "ClusteredDataGenerator.h"
+#include "Benchmark.h"
 
 void test_s16();
 void test_optpfd();
@@ -22,18 +23,34 @@ int main(int argc, const char * argv[]) {
     //test_s16();
     //test_optpfd();
     //test_datagen();
-    test_logger();
+    //test_logger();
+    
+    std::cout << "# benchmark based on the ClusterData model from:" << "\n";
+    std::cout << "# 	 Vo Ngoc Anh and Alistair Moffat. " << "\n";
+    std::cout << "#	 Index compression using 64-bit words." << "\n";
+    std::cout << "# 	 Softw. Pract. Exper.40, 2 (February 2010), 131-147. " << "\n\n";
+    
+    
+    Benchmark::test(20, 18, 10);
+    std::cout << "\n";
+    
     return 0;
 }
 
 void test_logger() {
+    Timer t;
+    t.start();
+    int k = 0;
+    while(k++ < 100000000);
+    t.end();
+    std::cout << t.getDuration()  ;
     
 }
 
 void test_datagen() {
     ClusteredDataGenerator cg;
-    unsigned int* example = cg.generateClustered(10, 5000);
-        for (int k = 0; k <10; ++k)
+    unsigned int* example = cg.generateClustered(262144, 524288);
+        for (int k = 0; k <262144; ++k)
             std::cout << example[k] << ' ';
 }
 

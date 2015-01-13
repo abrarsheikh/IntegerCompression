@@ -27,14 +27,13 @@ public:
      * Creating random array generator.
      */
     ClusteredDataGenerator();
+    
     /**
      * generates randomly N distinct integers from 0 to Max.
      *
-     * @param N
-     *                number of integers to generate
-     * @param Max
-     *                maximal value of the integers
-     * @return array containing the integers
+     * @param N         number of integers to generate
+     * @param Max       maximal value of the integers
+     * @return          array containing the integers
      */
     unsigned int* generateClustered(int N, int Max);
     

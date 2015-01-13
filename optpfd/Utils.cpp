@@ -27,8 +27,8 @@ int Utils::lcm(int a, int b)
     return temp ? (a / temp * b) : 0;
 }
 
-int Utils::maxbits(unsigned int* i, int length) {
-    int mask = 0;
+unsigned int Utils::maxbits(unsigned int* i, int length) {
+    unsigned int mask = 0;
     
     for (unsigned int *k = i; k < i + length; ++k)
         mask |= *k;
@@ -48,4 +48,9 @@ unsigned Utils::numberOfLeadingZeros(int x){
         x <<= 1;
     }
     return n;
+}
+
+void Utils::arrCpy(unsigned int * arr1, unsigned int *arr2, int len) {
+    for(int i = 0; i < len; i++)
+        arr1[i] = arr2[i];
 }

@@ -11,21 +11,29 @@
 
 #include <stdio.h>
 #include <chrono>
+#include <time.h>
+#include <sys/time.h>
+
+#ifdef __MACH__
+#include <mach/clock.h>
+#include <mach/mach.h>
+#endif
+#include <iostream>
 
 class Timer {
 public:
     Timer();
     
-    static void start();
+    void start();
     
-    static long end();
+    void end();
     
-    static long getDuration();
+    long getDuration();
     
 private:
-    static std::chrono::system_clock::time_point startNano;
+    timespec ts_beg, ts_end;
     
-    static long duration;
+    long duration;
 };
 
 class PerformanceLogger {
@@ -45,9 +53,9 @@ public:
     
     double getDecompressSpeed();
     
-    const Timer compressionTimer;
+    Timer compressionTimer;
     
-    const Timer decompressionTimer;
+    Timer decompressionTimer;
     
 private:
      long originalSize = 0;

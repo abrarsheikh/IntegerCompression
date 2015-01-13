@@ -26,7 +26,8 @@ UniformDataGenerator::UniformDataGenerator(const int seed) {
 unsigned int* UniformDataGenerator::generateUniformHash(int N, int Max) {
     if (N > Max)
         throw std::runtime_error("not possible");
-    unsigned int* ans = new unsigned int[N];
+    unsigned int* ans;
+    ans = new unsigned int[N];
     std::map<int, int> s;
     while (s.size() < N)
         s.insert(std::pair<int, int> (rand() % Max, 1));

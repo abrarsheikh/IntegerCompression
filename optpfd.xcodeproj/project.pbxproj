@@ -11,6 +11,7 @@
 		E53264C71A630FC900924B9E /* ClusteredDataGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E53264C51A630FC900924B9E /* ClusteredDataGenerator.cpp */; };
 		E53264CA1A630FE300924B9E /* UniformDataGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E53264C81A630FE300924B9E /* UniformDataGenerator.cpp */; };
 		E53264CD1A6333AD00924B9E /* Logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E53264CB1A6333AD00924B9E /* Logger.cpp */; };
+		E53264D01A633DD000924B9E /* Benchmark.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E53264CE1A633DD000924B9E /* Benchmark.cpp */; };
 		E5AE58201A5B203900E27DA9 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5AE581F1A5B203900E27DA9 /* main.cpp */; };
 		E5B6E0C11A5F4FCF00680CB6 /* IntegerCompression.h in Sources */ = {isa = PBXBuildFile; fileRef = E5B6E0C01A5F4FCF00680CB6 /* IntegerCompression.h */; };
 		E5B6E0C41A5F852400680CB6 /* OptPFDS16.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5B6E0C31A5F852400680CB6 /* OptPFDS16.cpp */; };
@@ -39,6 +40,8 @@
 		E53264C91A630FE300924B9E /* UniformDataGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UniformDataGenerator.h; sourceTree = "<group>"; };
 		E53264CB1A6333AD00924B9E /* Logger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Logger.cpp; sourceTree = "<group>"; };
 		E53264CC1A6333AD00924B9E /* Logger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Logger.h; sourceTree = "<group>"; };
+		E53264CE1A633DD000924B9E /* Benchmark.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Benchmark.cpp; sourceTree = "<group>"; };
+		E53264CF1A633DD000924B9E /* Benchmark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Benchmark.h; sourceTree = "<group>"; };
 		E5AE581C1A5B203900E27DA9 /* optpfd */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = optpfd; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5AE581F1A5B203900E27DA9 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		E5B6E0C01A5F4FCF00680CB6 /* IntegerCompression.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; path = IntegerCompression.h; sourceTree = "<group>"; };
@@ -104,6 +107,8 @@
 				E5B6E0C61A5F895B00680CB6 /* Utils.cpp */,
 				E53264CB1A6333AD00924B9E /* Logger.cpp */,
 				E53264CC1A6333AD00924B9E /* Logger.h */,
+				E53264CE1A633DD000924B9E /* Benchmark.cpp */,
+				E53264CF1A633DD000924B9E /* Benchmark.h */,
 			);
 			path = optpfd;
 			sourceTree = "<group>";
@@ -173,6 +178,7 @@
 				E5B6E0CA1A6026AF00680CB6 /* BitPacking.cpp in Sources */,
 				E5B6E0C71A5F895B00680CB6 /* Utils.cpp in Sources */,
 				E5B6E0C11A5F4FCF00680CB6 /* IntegerCompression.h in Sources */,
+				E53264D01A633DD000924B9E /* Benchmark.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,24 +7,43 @@
  */
 
 #include "Logger.h"
-
-
-std::chrono::system_clock::time_point Timer::startNano;
-long Timer::duration = 0;
         
 Timer::Timer() {
+    duration = 0;
 }
         
 void Timer::start() {
-    Timer::startNano = std::chrono::system_clock::now();
+#ifdef __MACH__ // OS X does not have clock_gettime, use clock_get_time
+    clock_serv_t cclock;
+    mach_timespec_t mts;
+    host_get_clock_service(mach_host_self(), CALENDAR_CLOCK, &cclock);
+    clock_get_time(cclock, &mts);
+    mach_port_deallocate(mach_task_self(), cclock);
+    ts_beg.tv_sec = mts.tv_sec;
+    ts_beg.tv_nsec = mts.tv_nsec;
+    
+#else
+    clock_gettime(CLOCK_REALTIME, &ts_beg);
+#endif
 }
         
-long Timer::end() {
-    return Timer::duration = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::system_clock::now() - Timer::startNano).count();
+void Timer::end() {
+#ifdef __MACH__ // OS X does not have clock_gettime, use clock_get_time
+    clock_serv_t cclock;
+    mach_timespec_t mts;
+    host_get_clock_service(mach_host_self(), CALENDAR_CLOCK, &cclock);
+    clock_get_time(cclock, &mts);
+    mach_port_deallocate(mach_task_self(), cclock);
+    ts_end.tv_sec = mts.tv_sec;
+    ts_end.tv_nsec = mts.tv_nsec;
+    
+#else
+    clock_gettime(CLOCK_REALTIME, &ts_end);
+#endif
 }
 
 long Timer::getDuration() {
-    return duration;
+    return (ts_end.tv_sec - ts_beg.tv_sec)*1e9 + (ts_end.tv_nsec - ts_beg.tv_nsec);
 }
 
 PerformanceLogger::PerformanceLogger() {

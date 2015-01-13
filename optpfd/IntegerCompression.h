@@ -5,6 +5,8 @@
  @author Abrar Sheikh
  @version 1.0
  */
+#ifndef __optpfd__IntegerCompression__
+#define __optpfd__IntegerCompression__
 
 #include <stdio.h>
 
@@ -22,7 +24,9 @@ public:
      * @param inlength      how many integers to compress
      * @param out           output array
      */
-    void compress(unsigned int* in, unsigned int inlength, unsigned int* out);
+    virtual unsigned int compress(unsigned int* in, unsigned int inlength, unsigned int* out) {
+        return 0;
+    }
     
     /**
      * Uncompress data from an array to another array.
@@ -34,7 +38,9 @@ public:
      * @param inlength      length of the compressed data (ignored by some schemes)
      * @param out           array where to write the compressed output
      */
-    void uncompress(unsigned int* in, int inlength, unsigned int* out);
+    virtual void uncompress(unsigned int* in, int inlength, unsigned int* out) {
+        
+    }
     
     /**
      * Compress data from an array to another array.
@@ -48,7 +54,9 @@ public:
      * @param inlength      how many integers to compress
      * @param out           output array
      */
-    void headlessCompress(unsigned int* in, int inlength,unsigned int* out);
+    virtual unsigned int headlessCompress(unsigned int* in, int inlength,unsigned int* out) {
+        return 0;
+    }
     
     /**
      * Uncompress data from an array to another array.
@@ -62,6 +70,9 @@ public:
      * @param num           number of integers we want to decode, the actual number of integers decoded can be less
      */
 
-    void headlessUncompress(unsigned int* in, int inlength, unsigned int* out,
-                                   int num);
+    virtual void headlessUncompress(unsigned int* in, int inlength, unsigned int* out, int num) {
+        
+    }
 };
+
+#endif /* defined(__optpfd__IntegerCompression__) */

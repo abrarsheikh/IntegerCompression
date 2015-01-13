@@ -9,6 +9,8 @@
 #ifndef optpfd_Utils_h
 #define optpfd_Utils_h
 
+#include <iostream>
+
 class Utils {
 public:
     static int gcd(int a, int b);
@@ -23,11 +25,13 @@ public:
      * @param length    number of integers to consider
      * @return integer logarithm
      */
-    static int maxbits(unsigned int* i, int length);
+    static unsigned int maxbits(unsigned int* i, int length);
     
     static int bits(int i);
     
     static unsigned numberOfLeadingZeros(int x);
+    
+    static void arrCpy(unsigned int *, unsigned int *, int);
     
 };
 

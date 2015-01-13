@@ -13,6 +13,7 @@
 #include "S16.h"
 #include "BitPacking.h"
 
+
 unsigned int OptPFDS16::headlessCompress(unsigned int* in, int inlength, unsigned int* out) {
     inlength = Utils::lcm(inlength, OptPFDS16::BLOCK_SIZE);
     if (inlength == 0)
@@ -33,14 +34,15 @@ void OptPFDS16::getBestBFromData(unsigned int* in, int* bestb, int* bestexcept) 
     int besti = bitscount - 1;
     int bestcost = bits[besti] * 4;
     int exceptcounter = 0;
-    for (int i = mini; i < bitscount- 1; ++i) {
+    for (int i = mini; i < bitscount - 1; ++i) {
         int tmpcounter = 0;
         for (unsigned int *k = in; k < BLOCK_SIZE + in; ++k)
             if ((*k >> bits[i]) != 0) {
                 ++tmpcounter;
             }
-        if (tmpcounter == BLOCK_SIZE)
+        if (tmpcounter == BLOCK_SIZE) {
             continue; // no need
+        }
         for (unsigned int *k = in, c = 0; k < in + BLOCK_SIZE; ++k)
             if ((*k >> bits[i]) != 0) {
                 exceptbuffer[tmpcounter + c] = k - in;
@@ -48,9 +50,7 @@ void OptPFDS16::getBestBFromData(unsigned int* in, int* bestb, int* bestexcept) 
                 ++c;
             }
         
-        const int thiscost = bits[i]
-        * 4
-        + S16::estimatecompress(exceptbuffer, 2 * tmpcounter);
+        const int thiscost = bits[i] * 4 + S16::estimatecompress(exceptbuffer, 2 * tmpcounter);
         if (thiscost <= bestcost) {
             bestcost = thiscost;
             besti = i;
@@ -68,8 +68,7 @@ void OptPFDS16::encodePage(unsigned int** in, int thissize, unsigned int** out){
     int bestexcept;
     for (const unsigned int *finalinpos = tmpinpos + thissize; tmpinpos
          + BLOCK_SIZE <= finalinpos; tmpinpos += BLOCK_SIZE) {
-        getBestBFromData(*in, &bestb, &bestexcept);
-        
+        getBestBFromData(tmpinpos, &bestb, &bestexcept);
         const int tmpbestb = bestb;
         const int nbrexcept = bestexcept;
         int exceptsize = 0;
@@ -90,7 +89,9 @@ void OptPFDS16::encodePage(unsigned int** in, int thissize, unsigned int** out){
         }
         *remember = tmpbestb | (nbrexcept << 8) | (exceptsize << 16);
         for (int k = 0; k < BLOCK_SIZE; k += 32) {
-            BitPacking::fastpack(*in + k, tmpoutpos, bits[tmpbestb]);
+            BitPacking::fastpack(tmpinpos + k, tmpoutpos, bits[tmpbestb]);
+            //if(bits[tmpbestb] == 32)
+                //std::cout  << *(tmpinpos + k)  << "\n";
             tmpoutpos += bits[tmpbestb];
         }
     }
@@ -132,7 +133,6 @@ void OptPFDS16::decodePage(unsigned int* in,unsigned int* out, int thissize) {
 
 unsigned int OptPFDS16::compress(unsigned int* in, int inlength, unsigned int* out) {
     inlength = (int)ceil((1.0 * inlength) / BLOCK_SIZE) * BLOCK_SIZE;
-    std::cout << inlength;
     if (inlength == 0)
         return -1;
     *out = inlength;

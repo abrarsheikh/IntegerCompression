@@ -11,6 +11,7 @@
 
 #include "IntegerCompression.h"
 
+
 class OptPFDS16 :  public IntegerCompression  {
     
     /**
@@ -18,13 +19,13 @@ class OptPFDS16 :  public IntegerCompression  {
      */
 public:
     OptPFDS16();
-    unsigned int headlessCompress(unsigned int* in, int inlength, unsigned int* out) ;
+    virtual unsigned int headlessCompress(unsigned int* in, int inlength, unsigned int* out) ;
     
-    void headlessUncompress(unsigned int* in, int inlength, unsigned int* out, int mynvalue);
+    virtual void headlessUncompress(unsigned int* in, int inlength, unsigned int* out, int mynvalue);
     
-    unsigned int compress(unsigned int* in, int inlength, unsigned int* out);
+    virtual unsigned int compress(unsigned int* in, int inlength, unsigned int* out);
     
-    void uncompress(unsigned int* in, int inlength, unsigned int* out);
+    virtual void uncompress(unsigned int* in, int inlength, unsigned int* out);
     
 private:
     static int bitscount;
