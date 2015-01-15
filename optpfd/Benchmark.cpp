@@ -8,7 +8,7 @@
 
 #include "Benchmark.h"
 
-void Benchmark::testCodec(int sparsity, OptPFDS16& c, unsigned int** data, genData gd, int repeat, bool verbose) {
+void Benchmark::testCodec(int sparsity, IntegerCompression& c, unsigned int** data, genData gd, int repeat, bool verbose) {
     if (verbose) {
         //std::cout "# " << c.toString() << "\n";
         std::cout << ("# bits per int, compress speed (mis), decompression speed (mis) ");
