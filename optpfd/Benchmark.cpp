@@ -1,13 +1,15 @@
-//
-//  Benchmark.cpp
-//  optpfd
-//
-//  Created by Abrar Sheikh on 11/01/15.
-//  Copyright (c) 2015 nyu. All rights reserved.
-//
+/**
+ Logger
+ Purpose: Benchmark
+ 
+ @author Abrar Sheikh
+ @version 1.0
+ */
 
 #include "Benchmark.h"
-
+#include "optpfd.h"
+#include "pfor.h"
+/*
 void Benchmark::testCodec(int sparsity, OptPFDS16& c, unsigned int** data, genData gd, int repeat, bool verbose) {
     if (verbose) {
         //std::cout "# " << c.toString() << "\n";
@@ -84,6 +86,63 @@ void Benchmark::testCodec(int sparsity, OptPFDS16& c, unsigned int** data, genDa
         printf("\t%1$.2f\t%2$f\t%3$f", bitsPerInt, compressSpeed, decompressSpeed);
     }
 }
+*/
+void Benchmark::testCodecTmp(int sparsity, unsigned int** data, genData gd, int repeat, bool verbose) {
+    if (verbose) {
+        //std::cout "# " << c.toString() << "\n";
+        std::cout << ("# bits per int, compress speed (mis), decompression speed (mis) ");
+    }
+    
+    int N = gd.numOfArray;
+    
+    int totalSize = 0;
+    int totalCompressSize = 0;
+    int maxLength = 0;
+    for (int k = 0; k < N; ++k) {
+        totalSize += gd.lenOfArray;
+        if (gd.lenOfArray > maxLength) {
+            maxLength = gd.lenOfArray;
+        }
+    }
+    
+    // 4x + 1024 to account for the possibility of some negative
+    // compression.
+    unsigned int* compressBuffer = new unsigned int[4 * maxLength + 1024];
+    unsigned int* decompressBuffer = new unsigned int[maxLength + 1024];
+    
+    // These variables hold time in microseconds (10^-6).
+    long compressTime = 0;
+    long decompressTime = 0;
+    
+    PerformanceLogger pl;
+    
+    int size = 0;
+    
+    for (int r = 0; r < repeat; ++r) {
+        size = 0;
+        for (int k = 0; k < N; ++k) {
+            unsigned int* backupdata;
+            backupdata = new unsigned int[gd.lenOfArray];
+            unsigned int compBuffSize = 0;
+            
+            Utils::arrCpy(backupdata, data[k], gd.lenOfArray);
+            
+            pl.compressionTimer.start();
+            compBuffSize = OPTPFDCompressDocids(backupdata, compressBuffer, gd.lenOfArray);
+            size += compBuffSize;
+            pl.compressionTimer.end();
+            
+            // measure time of compression.
+            compressTime += pl.compressionTimer.getDuration();
+        }
+    }
+    
+    if (verbose) {
+        double bitsPerInt = size * 32.0 / totalSize;
+        double compressSpeed = (totalSize * repeat * 1000.0) / (compressTime);
+        printf("\t%1$.2f\t%2$f\t%3$f", bitsPerInt, compressSpeed);
+    }
+}
 
 
 unsigned int** Benchmark::generateTestData(ClusteredDataGenerator dataGen, int N, int nbr, int sparsity, genData* gd) {
@@ -111,10 +170,12 @@ void Benchmark::test(int N, int nbr, int repeat) {
         unsigned int ** data;
         data = generateTestData(cdg, N, nbr, sparsity, &gd);
         std::cout << "# generating random data... ok." << "\n";
-        OptPFDS16 optPFDS16;
+        testCodecTmp(sparsity, data, gd, repeat, false);
+        /*OptPFDS16 optPFDS16;
         testCodec(sparsity, optPFDS16, data, gd, repeat, false);
         testCodec(sparsity, optPFDS16, data, gd, repeat, false);
         testCodec(sparsity, optPFDS16, data, gd, repeat, true);
+         */
         std::cout << "\n";
         
     }

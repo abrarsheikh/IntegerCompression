@@ -7,9 +7,6 @@
  */
 
 #include "ClusteredDataGenerator.h"
-#include "UniformDataGenerator.h"
-
-
 
 /**
  * Creating random array generator.
@@ -53,10 +50,3 @@ unsigned int* ClusteredDataGenerator::generateClustered(int N, int Max) {
     fillClustered(array, N, 0, Max);
     return array;
 }
-
-/**
- * Little test program.
- *
- * @param args
- *                arguments are ignored
- */

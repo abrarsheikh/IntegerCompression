@@ -8,8 +8,8 @@
 
 #include <iostream>
 
-#include "S16.h"
-#include "OptPFDS16.h"
+//#include "S16.h"
+//#include "OptPFDS16.h"
 #include "ClusteredDataGenerator.h"
 #include "Benchmark.h"
 
@@ -53,7 +53,7 @@ void test_datagen() {
         for (int k = 0; k <262144; ++k)
             std::cout << example[k] << ' ';
 }
-
+/*
 void test_optpfd() {
     unsigned int input[] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
         1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
@@ -107,3 +107,4 @@ void test_s16() {
         printf("%u -> %X -> %u\n", input[i], coded[i], output[i]);
     }
 }
+*/

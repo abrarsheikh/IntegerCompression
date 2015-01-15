@@ -12,8 +12,8 @@
 
 #include <stdio.h>
 #include <iostream>
-#include "IntegerCompression.h" 
-#include "OptPFDS16.h"
+//#include "IntegerCompression.h" 
+//#include "OptPFDS16.h"
 #include "ClusteredDataGenerator.h"
 #include "Logger.h"
 #include "Utils.h"
@@ -35,7 +35,8 @@ public:
      * @param repeat    How many times to repeat the test
      * @param verbose   whether to output result on screen
      */
-    static void testCodec(int sparsity, OptPFDS16& c, unsigned int ** data, genData gd, int repeat, bool verbose) ;
+    //static void testCodec(int sparsity, OptPFDS16& c, unsigned int ** data, genData gd, int repeat, bool verbose) ;
+    static void testCodecTmp(int sparsity, unsigned int ** data, genData gd, int repeat, bool verbose) ;
     
     /**
      * Generate test data.
