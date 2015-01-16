@@ -24,7 +24,7 @@ public:
      * @param inlength      how many integers to compress
      * @param out           output array
      */
-    virtual unsigned int compress(unsigned int* in, unsigned int inlength, unsigned int* out);
+    virtual unsigned int compress(unsigned int* in, int inlength, unsigned int* out) = 0;
     
     /**
      * Uncompress data from an array to another array.
@@ -36,7 +36,7 @@ public:
      * @param inlength      length of the compressed data (ignored by some schemes)
      * @param out           array where to write the compressed output
      */
-    virtual void uncompress(unsigned int* in, int inlength, unsigned int* out);
+    virtual void uncompress(unsigned int* in, int inlength, unsigned int* out) = 0;
     
     /**
      * Compress data from an array to another array.
@@ -50,7 +50,7 @@ public:
      * @param inlength      how many integers to compress
      * @param out           output array
      */
-    virtual unsigned int headlessCompress(unsigned int* in, int inlength,unsigned int* out);
+    virtual unsigned int headlessCompress(unsigned int* in, int inlength,unsigned int* out) = 0;
     
     /**
      * Uncompress data from an array to another array.
@@ -64,7 +64,7 @@ public:
      * @param num           number of integers we want to decode, the actual number of integers decoded can be less
      */
 
-    virtual void headlessUncompress(unsigned int* in, int inlength, unsigned int* out, int num);
+    virtual void headlessUncompress(unsigned int* in, int inlength, unsigned int* out, int num) = 0;
 };
 
 #endif /* defined(__optpfd__IntegerCompression__) */
