@@ -27,7 +27,7 @@ int S16::estimatecompress(unsigned int *in, int inlength) {
     const unsigned int *finalin = in + inlength;
     int counter = 0;
     while (in < finalin) {
-        int inoffset = fakecompressblock(in++, inlength);
+        int inoffset = fakecompressblock(in, inlength);
         if (inoffset == -1)
             throw std::runtime_error("Too big a number\n");
         in += inoffset;

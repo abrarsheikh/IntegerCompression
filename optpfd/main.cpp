@@ -10,6 +10,7 @@
 
 #include "S16.h"
 #include "OptPFDS16.h"
+#include <cmath>
 #include "ClusteredDataGenerator.h"
 #include "Benchmark.h"
 
@@ -21,18 +22,18 @@ void test_logger();
 int main(int argc, const char * argv[]) {
     // insert code here...
     //test_s16();
-    //test_optpfd();
+    test_optpfd();
     //test_datagen();
     //test_logger();
     
-    std::cout << "# benchmark based on the ClusterData model from:" << "\n";
-    std::cout << "# 	 Vo Ngoc Anh and Alistair Moffat. " << "\n";
-    std::cout << "#	 Index compression using 64-bit words." << "\n";
-    std::cout << "# 	 Softw. Pract. Exper.40, 2 (February 2010), 131-147. " << "\n\n";
-    
-    
-    Benchmark::test(20, 18, 10);
-    std::cout << "\n";
+//    std::cout << "# benchmark based on the ClusterData model from:" << "\n";
+//    std::cout << "# 	 Vo Ngoc Anh and Alistair Moffat. " << "\n";
+//    std::cout << "#	 Index compression using 64-bit words." << "\n";
+//    std::cout << "# 	 Softw. Pract. Exper.40, 2 (February 2010), 131-147. " << "\n\n";
+//    
+//    
+//    Benchmark::test(20, 18, 10);
+//    std::cout << "\n";
     
     return 0;
 }
@@ -55,34 +56,36 @@ void test_datagen() {
 }
 
 void test_optpfd() {
-    unsigned int input[] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-        1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-        1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-        1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-        1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-        1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-        1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-        1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-        1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-        1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-        1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 
-        1, 1, 1, 1, 1, 1, 1, 1};
+    unsigned int input[] = {26302126, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,};
     unsigned int *coded;
     unsigned int *output;
     
     int size = 128;
     
-    coded = new unsigned int[size];
-    output = new unsigned int[size];
+    int outsize =(int)ceil((1.0 * size) / 128) * 128;
+    
+    unsigned int* newinput;
+    newinput = new unsigned int[outsize];
+    
+    for(int i = 0; i < outsize; i++) {
+        if(i < size)
+            newinput[i] = input[i];
+        else
+            newinput[i] = 0;
+    }
+    
+    //std::cout << outsize << "\n";
+    
+    coded = new unsigned int[outsize];
+    output = new unsigned int[outsize];
     OptPFDS16 c;
-    unsigned int newsize = c.compress(input, size, coded);
+    unsigned int newsize = c.compress(newinput, size, coded);
     c.uncompress(coded, newsize, output);
     
     printf("Normal size: %d\n", size);
     printf("Compress size: %d\n", newsize);
-    for(int i = 0; i < size; i++) {
-        printf("%u -> %X -> %u\n", input[i], coded[i], output[i]);
+    for(int i = 0; i < outsize; i++) {
+        printf("%u -> %X -> %u\n", newinput[i], coded[i], output[i]);
     }
 
 }

@@ -19,6 +19,7 @@ class OptPFDS16 :  public IntegerCompression  {
      */
 public:
     OptPFDS16();
+    ~OptPFDS16();
     virtual unsigned int headlessCompress(unsigned int* in, int inlength, unsigned int* out) ;
     
     virtual void headlessUncompress(unsigned int* in, int inlength, unsigned int* out, int mynvalue);

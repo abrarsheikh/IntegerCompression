@@ -28,23 +28,23 @@ unsigned int OptPFDS16::headlessCompress(unsigned int* in, int inlength, unsigne
 void OptPFDS16::getBestBFromData(unsigned int* in, int* bestb, int* bestexcept) {
     const int mb = Utils::maxbits(in, BLOCK_SIZE);
     int mini = 0;
-    if (mini + 28 < bits[invbits[mb]])
-        mini = bits[invbits[mb]] - 28; // 28 is the max for
+//    if (mini + 28 < bits[invbits[mb]])
+//        mini = bits[invbits[mb]] - 28; // 28 is the max for
     // exceptions
-    int besti = bitscount - 1;
-    int bestcost = bits[besti] * 4;
+    int besti = bitscount ;
+    int bestcost = bits[besti] * 8;
     int exceptcounter = 0;
-    for (int i = mini; i < bitscount - 1; ++i) {
+    for (int i = mini; i < bitscount ; ++i) {
         int tmpcounter = 0;
         for (unsigned int *k = in; k < BLOCK_SIZE + in; ++k)
-            if ((*k >> bits[i]) != 0) {
+            if ((*k >> bits[i]) != 0 && bits[i] != 32) {
                 ++tmpcounter;
             }
         if (tmpcounter == BLOCK_SIZE) {
             continue; // no need
         }
         for (unsigned int *k = in, c = 0; k < in + BLOCK_SIZE; ++k)
-            if ((*k >> bits[i]) != 0) {
+            if ((*k >> bits[i]) != 0 && bits[i] != 32) {
                 exceptbuffer[tmpcounter + c] = k - in;
                 exceptbuffer[c] = *k >> bits[i];
                 ++c;
@@ -66,6 +66,7 @@ void OptPFDS16::encodePage(unsigned int** in, int thissize, unsigned int** out){
     unsigned int* tmpinpos = *in;
     int bestb;
     int bestexcept;
+    int counter = 0;
     for (const unsigned int *finalinpos = tmpinpos + thissize; tmpinpos
          + BLOCK_SIZE <= finalinpos; tmpinpos += BLOCK_SIZE) {
         getBestBFromData(tmpinpos, &bestb, &bestexcept);
@@ -93,8 +94,10 @@ void OptPFDS16::encodePage(unsigned int** in, int thissize, unsigned int** out){
             //if(bits[tmpbestb] == 32)
                 //std::cout  << *(tmpinpos + k)  << "\n";
             tmpoutpos += bits[tmpbestb];
+            counter +=bits[tmpbestb];
         }
     }
+    
     *in = tmpinpos;
     *out = tmpoutpos;
 }
@@ -161,6 +164,10 @@ int OptPFDS16::invbits[] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
 
 OptPFDS16::OptPFDS16() {
     exceptbuffer = new unsigned int[2 * BLOCK_SIZE];
+}
+
+OptPFDS16::~OptPFDS16() {
+    delete exceptbuffer;
 }
 
 
